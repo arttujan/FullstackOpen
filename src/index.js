@@ -1,34 +1,25 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-
-const Display = ({counter}) => {
-  return (
-    <div>{counter}</div>
-  )
-}
-
-const Button = ({handleClick, text}) => {
-  return (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
-}
-
 const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
 
-  const plussaalaskuri = () => setCounter(counter + 1)
-  const nollaalaskuri = () => setCounter(0)
-  const miinustalaskuri = () => setCounter(counter - 1)
+  const handleLeftClick = () =>
+  setClicks({ ...clicks, left: clicks.left + 1 })
+
+  const handleRightClick = () =>
+  setClicks({ ...clicks, right: clicks.right + 1 })
 
   return (
     <div>
-      <Display counter={counter}/>
-      <Button handleClick={plussaalaskuri} text='plussaa laskuriin'/>
-      <Button handleClick={nollaalaskuri} text='nollaa laskuri'/>
-      <Button handleClick={miinustalaskuri} text='miinusta laskurista'/>
+      <div>
+        {clicks.left}
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
+        {clicks.right}
+      </div>
   </div>
   )
 }
