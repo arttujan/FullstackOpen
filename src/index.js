@@ -1,37 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Hello = (props) => {
+
+const Display = ({counter}) => {
   return (
-    <div>
-      <p>Hello {props.name}, you are {props.age} years old</p>
-    </div>
+    <div>{counter}</div>
   )
 }
 
-const App = () => {
-  const nimi = 'Pekka'
-  const ika = 10
+const Button = ({handleClick, text}) => {
   return (
-    <>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={nimi} age={ika} />
-      <Footer />
-    </>
+    <button onClick={handleClick}>
+      {text}
+    </button>
   )
 }
 
-const Footer = () => {
+const App = (props) => {
+  const [ counter, setCounter ] = useState(0)
+
+  const plussaalaskuri = () => setCounter(counter + 1)
+  const nollaalaskuri = () => setCounter(0)
+  const miinustalaskuri = () => setCounter(counter - 1)
+
   return (
     <div>
-      greeting app created by 
-      <a href="https://github.com/mluukkai">mluukkai</a>
-    </div>
+      <Display counter={counter}/>
+      <Button handleClick={plussaalaskuri} text='plussaa laskuriin'/>
+      <Button handleClick={nollaalaskuri} text='nollaa laskuri'/>
+      <Button handleClick={miinustalaskuri} text='miinusta laskurista'/>
+  </div>
   )
 }
+
 
 ReactDOM.render(
-  React.createElement(App, null),
+  <App />, 
   document.getElementById('root')
 )
+
